@@ -14,15 +14,15 @@ import {
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import { FaMoon, FaSearchengin, FaSun } from "react-icons/fa";
 import {
-  ClearRefinements,
   Configure,
   Hits,
   InstantSearch,
   Pagination,
-  RefinementList,
-  SearchBox,
-  SortBy,
 } from "react-instantsearch-dom";
+import CustomClearRefinements from "../components/CustomClearRefinements";
+import CustomRefinementList from "../components/CustomRefinementList";
+import CustomSearchBox from "../components/CustomSearchBox";
+import CustomSortBy from "../components/CustomSortBy";
 
 const searchClient = instantMeiliSearch(
   "http://localhost:7700",
@@ -89,12 +89,12 @@ export default function SearchEngine(props) {
           <InstantSearch indexName="copies" searchClient={searchClient}>
             <Grid
               templateRows="repeat(2, 1fr)"
-              templateColumns="repeat(6, 1fr)"
+              templateColumns="repeat(8, 1fr)"
               gap={5}
             >
-              <GridItem rowSpan={2} w="100%" colSpan={1}>
-                <ClearRefinements />
-                <SortBy
+              <GridItem rowSpan={2} w="100%" colSpan={2}>
+                <CustomClearRefinements />
+                <CustomSortBy
                   defaultRefinement="copies"
                   items={[
                     { value: "copies", label: "BarCode" },
@@ -108,22 +108,23 @@ export default function SearchEngine(props) {
                     },
                   ]}
                 />
-                <h2>Biblioteca</h2>
-                <RefinementList attribute="medium_type" />
-                <h2>Tipo</h2>
-                <RefinementList attribute="location" />
+                <Heading as="h6" size="xs" mt={4} mb={2}>
+                  Biblioteca
+                </Heading>
+                <CustomRefinementList attribute="medium_type" />
+                <Heading as="h6" size="xs" mt={4} mb={2}>
+                  Tipo
+                </Heading>
+                <CustomRefinementList attribute="location" />
                 <Configure
                   hitsPerPage={5}
                   attributesToSnippet={["description:50"]}
                   snippetEllipsisText={"..."}
                 />
-                Menú buscador
               </GridItem>
-              <GridItem colSpan={4} w="100%">
-                <SearchBox />
+              <GridItem rowSpan={2} colSpan={6} w="100%">
+                <CustomSearchBox />
                 <Hits />
-              </GridItem>
-              <GridItem colSpan={4}>
                 <Pagination />
               </GridItem>
             </Grid>

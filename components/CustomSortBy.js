@@ -1,12 +1,14 @@
-import { Select } from "@chakra-ui/react";
+import { Box, Select } from "@chakra-ui/react";
 import { connectSortBy } from "react-instantsearch-dom";
 
 const SortBy = ({ items, refine }) => (
-  <ul>
+  <Box>
     <Select
+      spacing={3}
       placeholder="Select option"
-      onChange={(item) => {
-        refine(item.value);
+      onChange={(event) => {
+        event.preventDefault();
+        refine(event.target.value);
       }}
     >
       {items.map((item) => (
@@ -19,7 +21,7 @@ const SortBy = ({ items, refine }) => (
         </option>
       ))}
     </Select>
-  </ul>
+  </Box>
 );
 
 const CustomSortBy = connectSortBy(SortBy);

@@ -1,10 +1,10 @@
-import { Checkbox } from "@chakra-ui/react";
+import { Checkbox, List, ListItem, Text } from "@chakra-ui/react";
 import { connectRefinementList } from "react-instantsearch-dom";
 
 const RefinementList = ({ items, refine }) => (
-  <ul>
+  <List>
     {items.map((item) => (
-      <li key={item.label}>
+      <ListItem key={item.label}>
         <Checkbox
           style={{ fontWeight: item.isRefined ? "bold" : "" }}
           onChange={(event) => {
@@ -12,11 +12,13 @@ const RefinementList = ({ items, refine }) => (
             refine(item.value);
           }}
         >
-          {item.label} ({item.count})
+          <Text fontSize="xs">
+            {item.label} ({item.count})
+          </Text>
         </Checkbox>
-      </li>
+      </ListItem>
     ))}
-  </ul>
+  </List>
 );
 
 const CustomRefinementList = connectRefinementList(RefinementList);

@@ -1,10 +1,12 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Center } from "@chakra-ui/react";
 import { connectCurrentRefinements } from "react-instantsearch-dom";
 
 const ClearRefinements = ({ items, refine }) => (
-  <Button onClick={() => refine(items)} disabled={!items.length}>
-    Clear all refinements
-  </Button>
+  <Center m={5}>
+    <Button onClick={() => refine(items)} disabled={!items.length}>
+      Clear all refinements
+    </Button>
+  </Center>
 );
 
 const CustomClearRefinements = connectCurrentRefinements(ClearRefinements);
