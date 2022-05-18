@@ -13,13 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import { FaMoon, FaSearchengin, FaSun } from "react-icons/fa";
-import {
-  Configure,
-  Hits,
-  InstantSearch,
-  Pagination,
-} from "react-instantsearch-dom";
+import { Configure, InstantSearch } from "react-instantsearch-dom";
 import CustomClearRefinements from "../components/CustomClearRefinements";
+import CustomHits from "../components/CustomHits";
+import CustomPagination from "../components/CustomPagination";
 import CustomRefinementList from "../components/CustomRefinementList";
 import CustomSearchBox from "../components/CustomSearchBox";
 import CustomSortBy from "../components/CustomSortBy";
@@ -92,7 +89,7 @@ export default function SearchEngine(props) {
               templateColumns="repeat(8, 1fr)"
               gap={5}
             >
-              <GridItem rowSpan={2} w="100%" colSpan={2}>
+              <GridItem rowSpan={2} w="100%" colSpan={1}>
                 <CustomClearRefinements />
                 <CustomSortBy
                   defaultRefinement="copies"
@@ -117,15 +114,15 @@ export default function SearchEngine(props) {
                 </Heading>
                 <CustomRefinementList attribute="location" />
                 <Configure
-                  hitsPerPage={5}
+                  hitsPerPage={9}
                   attributesToSnippet={["description:50"]}
                   snippetEllipsisText={"..."}
                 />
               </GridItem>
-              <GridItem rowSpan={2} colSpan={6} w="100%">
+              <GridItem rowSpan={2} colSpan={7} w="100%">
                 <CustomSearchBox />
-                <Hits />
-                <Pagination />
+                <CustomHits />
+                <CustomPagination />
               </GridItem>
             </Grid>
           </InstantSearch>
