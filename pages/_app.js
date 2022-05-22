@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import SuperTokensReact from "supertokens-auth-react";
 import Session from "supertokens-auth-react/recipe/session";
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+import { Layout } from "../components";
 import * as SuperTokensConfig from "../config/frontendConfig";
 import theme from "../theme";
 
@@ -30,7 +31,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <ChakraProvider resetCSS theme={theme}>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ChakraProvider>
   );
 }
