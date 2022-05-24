@@ -2,9 +2,10 @@ import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { Hit } from "../../components";
 
-const Copy = () => {
+const Copy = ({ data }) => {
   const router = useRouter();
   const { id } = router.query;
+  console.log(data);
 
   const hit = {
     author_name: "Hartog, Johan",
@@ -19,9 +20,19 @@ const Copy = () => {
 
   return (
     <Flex p={10} mt={20}>
-      <Hit hit={hit} w="100%" disableAction={true} />
+      <Hit hit={data[0].antecedents} w="100%" disableAction={true} />
     </Flex>
   );
 };
+
+export async function getServerSideProps(context) {
+  const id = context.params.id;
+  // Fetch data from external API
+  const res = await fetch(`http://localhost:8000/api/v1/rules/rules?id=${id}`);
+  const data = await res.json();
+
+  // Pass data to the page via props
+  return { props: { data } };
+}
 
 export default Copy;

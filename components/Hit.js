@@ -60,11 +60,11 @@ const Hit = ({ hit, w, disableAction }) => (
       </Box>
       <Divider />
       <Flex mt={4} justifyContent="space-between" alignContent="center">
-        <Text fontSize="sm" as="h8" noOfLines={1}>
+        <Text fontSize="sm" as="h6" noOfLines={1}>
           {hit.author_name}
         </Text>
         <Spacer />
-        <Heading fontSize="sm" as="h8" noOfLines={1}>
+        <Heading fontSize="sm" as="h6" noOfLines={1}>
           {hit.medium_type}
         </Heading>
       </Flex>
