@@ -34,7 +34,7 @@ function Rating({ rating, numReviews }) {
   );
 }
 
-const Hit = ({ hit, w, disableAction }) => (
+const Hit = ({ hit, w, disableAction, rule }) => (
   <Box
     bg={useColorModeValue("white", "gray.800")}
     maxW="sm"
@@ -89,6 +89,35 @@ const Hit = ({ hit, w, disableAction }) => (
           {hit.location}
         </Box>
       </Flex>
+
+      {rule && (
+        <Box>
+          <Divider />
+          <Text fontSize="sm" as="h6" noOfLines={1}>
+            <b>antecedent_support:</b>{" "}
+            {parseFloat(rule.antecedent_support).toFixed(3)}
+          </Text>
+          <Text fontSize="sm" as="h6" noOfLines={1}>
+            <b>consequent_support:</b>{" "}
+            {parseFloat(rule.consequent_support).toFixed(3)}
+          </Text>
+          <Text fontSize="sm" as="h6" noOfLines={1}>
+            <b>support:</b> {parseFloat(rule.support).toFixed(3)}
+          </Text>
+          <Text fontSize="sm" as="h6" noOfLines={1}>
+            <b>confidence:</b> {parseFloat(rule.confidence).toFixed(3)}
+          </Text>
+          <Text fontSize="sm" as="h6" noOfLines={1}>
+            <b>lift:</b> {parseFloat(rule.lift).toFixed(3)}
+          </Text>
+          <Text fontSize="sm" as="h6" noOfLines={1}>
+            <b>leverage:</b> {parseFloat(rule.leverage).toFixed(3)}
+          </Text>
+          <Text fontSize="sm" as="h6" noOfLines={1}>
+            <b>conviction:</b> {parseFloat(rule.conviction).toFixed(3)}
+          </Text>
+        </Box>
+      )}
     </Box>
 
     <Divider />
