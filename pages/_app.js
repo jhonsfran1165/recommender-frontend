@@ -1,8 +1,8 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import SuperTokensReact from "supertokens-auth-react";
+import { redirectToAuth } from "supertokens-auth-react/recipe/emailpassword";
 import Session from "supertokens-auth-react/recipe/session";
-import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import { Layout } from "../components";
 import * as SuperTokensConfig from "../config/frontendConfig";
 import theme from "../theme";

@@ -10,7 +10,9 @@ const Layout = ({ children }) => {
     >
       <VStack>
         <Header />
-        <main>{children}</main>
+        <main style={{ "margin-top": "150px", "margin-bottom": "100px" }}>
+          {children}
+        </main>
         <Footer />
       </VStack>
     </Container>

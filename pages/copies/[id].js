@@ -5,11 +5,11 @@ import { Hit } from "../../components";
 const Copy = ({ copy, rules }) => {
   const router = useRouter();
   return (
-    <VStack mb={20}>
-      <Flex p={10} mt={20}>
+    <VStack>
+      <Flex p={10}>
         <Hit hit={copy} w="100%" disableAction={true} />
       </Flex>
-      <Flex gap={4} w="100%" wrap="wrap" m={8} pl={2}>
+      <Flex gap={4} w="100%" wrap="wrap" pl={2}>
         {rules.map((rule) => {
           const {
             antecedent_support,

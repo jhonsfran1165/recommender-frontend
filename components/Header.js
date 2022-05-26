@@ -9,6 +9,7 @@ const Header = (props) => {
   return (
     <Flex
       p={5}
+      zIndex={999}
       w="100%"
       as="header"
       position="fixed"
