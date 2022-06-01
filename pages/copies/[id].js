@@ -1,30 +1,34 @@
 import { Flex, VStack } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { Hit } from "../../components";
+import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
+import { Hit, Loader } from "../../components";
+import useCopy from "../../hooks/useCopy";
+import useRules from "../../hooks/useRules";
 
-const Copy = ({ copy, rules }) => {
+const EmailPasswordAuthNoSSR = dynamic(
+  new Promise((res) => res(EmailPassword.EmailPasswordAuth)),
+  { ssr: false }
+);
+
+const Copy = (props) => {
   const router = useRouter();
-  return (
-    <VStack>
-      <Flex p={10}>
-        <Hit hit={copy} w="100%" disableAction={true} />
-      </Flex>
-      <Flex gap={4} w="100%" wrap="wrap" pl={2}>
-        {rules.map((rule) => {
-          const {
-            antecedent_support,
-            consequent_support,
-            support,
-            confidence,
-            lift,
-            leverage,
-            conviction,
-          } = rule;
+  const { id } = router.query;
+  const [loading, data, error] = useCopy(id);
+  const [loadingRules, dataRules, errorRules] = useRules(id);
 
-          return (
-            <Hit
-              key={rule.consequents.id}
-              rule={{
+  if (loading || loadingRules) {
+    return <Loader />;
+  } else {
+    return (
+      <EmailPasswordAuthNoSSR>
+        <VStack>
+          <Flex p={10}>
+            <Hit hit={data} w="100%" disableAction={true} />
+          </Flex>
+          <Flex gap={4} w="100%" wrap="wrap" pl={2}>
+            {dataRules?.map((rule) => {
+              const {
                 antecedent_support,
                 consequent_support,
                 support,
@@ -32,27 +36,30 @@ const Copy = ({ copy, rules }) => {
                 lift,
                 leverage,
                 conviction,
-              }}
-              hit={rule.consequents}
-              w="100%"
-            />
-          );
-        })}
-      </Flex>
-    </VStack>
-  );
+              } = rule;
+
+              return (
+                <Hit
+                  key={rule.consequents.id}
+                  rule={{
+                    antecedent_support,
+                    consequent_support,
+                    support,
+                    confidence,
+                    lift,
+                    leverage,
+                    conviction,
+                  }}
+                  hit={rule.consequents}
+                  w="100%"
+                />
+              );
+            })}
+          </Flex>
+        </VStack>
+      </EmailPasswordAuthNoSSR>
+    );
+  }
 };
-
-export async function getServerSideProps(context) {
-  const id = context.params.id;
-  // Fetch data from external API
-  const res = await fetch(`http://localhost:8000/api/v1/rules/rules?id=${id}`);
-  const copy = await fetch(`http://localhost:8000/api/v1/copies/copy?id=${id}`);
-  const copy_data = await copy.json();
-  const rules = await res.json();
-
-  // Pass data to the page via props
-  return { props: { copy: copy_data, rules } };
-}
 
 export default Copy;

@@ -1,8 +1,11 @@
 import { Flex, IconButton, Spacer, useColorMode } from "@chakra-ui/react";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { useRouter } from "next/router";
+import { FaMoon, FaSignOutAlt, FaSun } from "react-icons/fa";
+import { signOut } from "supertokens-auth-react/recipe/emailpassword";
 import Logo from "./Logo";
 
 const Header = (props) => {
+  const router = useRouter();
   const { colorMode, toggleColorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
@@ -25,6 +28,16 @@ const Header = (props) => {
         color="gray.700"
         isRound="true"
         onClick={toggleColorMode}
+      ></IconButton>
+      <IconButton
+        ml={4}
+        icon={<FaSignOutAlt />}
+        color="gray.700"
+        isRound="true"
+        onClick={async () => {
+          await signOut();
+          router.push("/");
+        }}
       ></IconButton>
     </Flex>
   );

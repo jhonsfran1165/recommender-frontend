@@ -1,3 +1,4 @@
+import Auth from "./Auth";
 import CustomClearRefinements from "./CustomClearRefinements";
 import CustomHits from "./CustomHits";
 import CustomPagination from "./CustomPagination";
@@ -8,7 +9,9 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Hero from "./Hero";
 import Hit from "./Hit";
+import Landing from "./Landing";
 import Layout from "./Layout";
+import Loader from "./Loader";
 import Logo from "./Logo";
 import Search from "./Search";
 
@@ -26,4 +29,7 @@ export {
   Logo,
   Layout,
   Hit,
+  Landing,
+  Loader,
+  Auth,
 };
