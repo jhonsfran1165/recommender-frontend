@@ -16,6 +16,7 @@
     "react-dom": "^17.0.0",
     "react-icons": "^4.3.1",
     "react-instantsearch-dom": "^6.24.2",
+    "recharts": "^2.1.12",
     "supertokens-auth-react": "^0.21.3"
   }
 }
