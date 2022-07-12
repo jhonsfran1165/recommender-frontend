@@ -1,7 +1,6 @@
 import { Flex, Grid, GridItem, Heading } from "@chakra-ui/react";
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import { Configure, InstantSearch } from "react-instantsearch-dom";
-import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import {
   CustomClearRefinements,
   CustomHits,
@@ -18,9 +17,6 @@ const searchClient = instantMeiliSearch(
 );
 
 const Search = (props) => {
-  // TODO: create empty state
-
-  console.log(useSessionContext());
   return (
     <Flex w="100%" p={10}>
       <InstantSearch indexName="copies" searchClient={searchClient}>

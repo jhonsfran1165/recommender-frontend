@@ -1,3 +1,5 @@
+import { Box, Text } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React from "react";
 import {
@@ -10,8 +12,14 @@ import {
   YAxis,
   ZAxis,
 } from "recharts";
-import { Loader } from "../components";
+import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
+import { Hero, Loader } from "../components";
 import useKmeans from "../hooks/useKmeans";
+
+const EmailPasswordAuthNoSSR = dynamic(
+  new Promise((res) => res(EmailPassword.EmailPasswordAuth)),
+  { ssr: false }
+);
 
 const CustomizedAxisTick = (props) => {
   const { x, y, stroke, payload } = props;
@@ -32,16 +40,64 @@ const CustomizedAxisTick = (props) => {
   );
 };
 
-export default function KMeans() {
+const shapes = [
+  "triangle",
+  "star",
+  "circle",
+  "cross",
+  "diamond",
+  "square",
+  "wye",
+];
+
+const colors = [
+  "#FC8181",
+  "#2D3748",
+  "#ED8936",
+  "#2F855A",
+  "#3182CE",
+  "#553C9A",
+  "#744210",
+];
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    const title_name = "";
+    return (
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        bg="#718096"
+        w="100%"
+        p={4}
+        color="white"
+      >
+        {payload.map((element, index) => {
+          title_name = element.payload.title_name;
+
+          return (
+            <Text key={index} fontSize="xs">
+              <b>{`${element.name} : `}</b>
+              {`${element.value} ${element.unit}`}
+            </Text>
+          );
+        })}
+
+        <Text fontSize="md">
+          <b>Title Name : </b>
+          {`${title_name}`}
+        </Text>
+      </Box>
+    );
+  }
+
+  return null;
+};
+
+const KMeans = () => {
   const router = useRouter();
   const [loading, data, error] = useKmeans();
-  let clustersData = [];
-  let clustersName = [];
-
-  data?.forEach((element) => {
-    clustersName.push(element.cluster);
-    clustersData.push(element.data);
-  });
 
   if (loading) {
     return <Loader />;
@@ -49,13 +105,13 @@ export default function KMeans() {
 
   return (
     <ScatterChart
-      width={400}
-      height={400}
+      width={600}
+      height={600}
       margin={{
-        top: 20,
-        right: 20,
-        bottom: 20,
-        left: 20,
+        top: 40,
+        right: 40,
+        bottom: 40,
+        left: 40,
       }}
     >
       <CartesianGrid />
@@ -75,39 +131,44 @@ export default function KMeans() {
       <ZAxis
         type="number"
         dataKey="score"
-        range={[60, 400]}
+        range={[100, 600]}
         name="score"
-        unit=""
+        unit="points"
       />
-      <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-      <Legend />
+      <Tooltip
+        content={CustomTooltip}
+        cursor={{ stroke: "red", strokeWidth: 2 }}
+      />
+      <Legend verticalAlign="top" height={36} />
 
-      <Scatter
-        name={"Cluster" + clustersName[0]}
-        data={clustersData[0]}
-        fill="#8884d8"
-        shape="star"
-      />
-      <Scatter
-        name={"Cluster" + clustersName[1]}
-        data={clustersData[1]}
-        fill="#82ca9d"
-        shape="triangle"
-      />
-      <Scatter
-        name={"Cluster" + clustersName[2]}
-        data={clustersData[2]}
-        fill="#82347d"
-        shape="circle"
-        onClick={(props) => {
-          const title = props.payload.trans_tittle_code_id;
-          console.log(title);
-          router.push(`/copy/${title}`);
-        }}
-        style={{
-          cursor: "pointer",
-        }}
-      />
+      {data?.map((element, index) => {
+        return (
+          <Scatter
+            key={index}
+            id={index}
+            name={"Cluster " + element.cluster}
+            data={element.data}
+            fill={colors[index]}
+            shape={shapes[index]}
+            onClick={(props) => {
+              const title = props.trans_tittle_code_id;
+              router.push(`/titles/${title}`);
+            }}
+            style={{
+              cursor: "pointer",
+            }}
+          />
+        );
+      })}
     </ScatterChart>
+  );
+};
+
+export default function KMeansPage() {
+  return (
+    <EmailPasswordAuthNoSSR>
+      <Hero />
+      <KMeans />
+    </EmailPasswordAuthNoSSR>
   );
 }
