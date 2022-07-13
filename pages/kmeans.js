@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Container, Stack, Text } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React from "react";
@@ -105,8 +105,8 @@ const KMeans = () => {
 
   return (
     <ScatterChart
-      width={600}
-      height={600}
+      width={500}
+      height={500}
       margin={{
         top: 40,
         right: 40,
@@ -118,14 +118,14 @@ const KMeans = () => {
       <XAxis
         type="number"
         dataKey="borrow_days"
-        name="dias de prestamos"
+        name="dias de préstamo"
         unit="days"
         tick={<CustomizedAxisTick />}
       />
       <YAxis
         type="number"
         dataKey="borrow_numbers"
-        name="numero de prestamos"
+        name="numero de préstamo"
         unit="veces"
       />
       <ZAxis
@@ -140,7 +140,6 @@ const KMeans = () => {
         cursor={{ stroke: "red", strokeWidth: 2 }}
       />
       <Legend verticalAlign="top" height={36} />
-
       {data?.map((element, index) => {
         return (
           <Scatter
@@ -167,8 +166,20 @@ const KMeans = () => {
 export default function KMeansPage() {
   return (
     <EmailPasswordAuthNoSSR>
-      <Hero />
-      <KMeans />
+      {" "}
+      <Container>
+        <Stack as={Box}>
+          <Hero />
+          <Text color={"gray.500"}>
+            *** Esta gráfica representa los títulos más demandados para tu
+            programa académico ten en cuenta que la cantidad de días es una
+            sumatoria total de los días en que cada copia del título has sido
+            prestada. ***
+          </Text>
+
+          <KMeans />
+        </Stack>
+      </Container>
     </EmailPasswordAuthNoSSR>
   );
 }
