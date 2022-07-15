@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { appInfo } from "../config/appInfo";
 
-const useRules = (id) => {
-  const url = `${appInfo.apiDomain}${appInfo.apiVersionPath}rules/rules?id=${id}`;
+const useRules = (id, confidence = 0.5, lift = 1.5) => {
+  const url = `${appInfo.apiDomain}${appInfo.apiVersionPath}rules/rules?id=${id}&confidence=${confidence}&lift=${lift}`;
   const [rules, setRules] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
