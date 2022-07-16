@@ -7,8 +7,12 @@ export let frontendConfig = () => {
   return {
     appInfo,
     recipeList: [
-      SessionReact.init(),
+      SessionReact.init({
+        isInIframe: false,
+      }),
       EmailPassword.init({
+        isInIframe: false,
+        useShadowDom: false,
         getRedirectionURL: async (context) => {
           if (context.action === "SUCCESS") {
             if (context.redirectToPath !== undefined) {

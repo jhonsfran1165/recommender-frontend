@@ -1,0 +1,25 @@
+version: "3.4"
+
+services:
+  recommender-cypress:
+    image: cypress/included:7.5.0
+    container_name: recommender-cypress
+    # comment this line to execute test in a headless way
+    entrypoint: cypress open --project /app
+    working_dir: /app
+    network_mode: "host"
+    env_file:
+      - .env
+    volumes:
+      - ./e2e/cypress:/app/cypress
+      - ./e2e/cypress.json:/app/cypress.json
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      # https://github.com/cypress-io/cypress-docker-images/issues/29
+      # pass base url to test pointing at the web application
+      # xhost local:root
+      - DISPLAY=unix$DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - _X11_NO_MITSHM=1
+      - _MITSHM=0
+

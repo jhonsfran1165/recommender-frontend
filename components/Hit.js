@@ -95,26 +95,26 @@ const Hit = ({ hit, w, disableAction, rule }) => (
           <Divider />
           <Text fontSize="sm" as="h6" noOfLines={1}>
             <b>antecedent_support:</b>{" "}
-            {parseFloat(rule.antecedent_support).toFixed(3)}
+            {parseFloat(rule.antecedent_support).toFixed(6)}
           </Text>
           <Text fontSize="sm" as="h6" noOfLines={1}>
             <b>consequent_support:</b>{" "}
-            {parseFloat(rule.consequent_support).toFixed(3)}
+            {parseFloat(rule.consequent_support).toFixed(6)}
           </Text>
           <Text fontSize="sm" as="h6" noOfLines={1}>
-            <b>support:</b> {parseFloat(rule.support).toFixed(3)}
+            <b>support:</b> {parseFloat(rule.support).toFixed(6)}
           </Text>
           <Text fontSize="sm" as="h6" noOfLines={1}>
-            <b>confidence:</b> {parseFloat(rule.confidence).toFixed(3)}
+            <b>confidence:</b> {parseFloat(rule.confidence).toFixed(6)}
           </Text>
           <Text fontSize="sm" as="h6" noOfLines={1}>
-            <b>lift:</b> {parseFloat(rule.lift).toFixed(3)}
+            <b>lift:</b> {parseFloat(rule.lift).toFixed(6)}
           </Text>
           <Text fontSize="sm" as="h6" noOfLines={1}>
-            <b>leverage:</b> {parseFloat(rule.leverage).toFixed(3)}
+            <b>leverage:</b> {parseFloat(rule.leverage).toFixed(6)}
           </Text>
           <Text fontSize="sm" as="h6" noOfLines={1}>
-            <b>conviction:</b> {parseFloat(rule.conviction).toFixed(3)}
+            <b>conviction:</b> {parseFloat(rule.conviction).toFixed(6)}
           </Text>
         </Box>
       )}

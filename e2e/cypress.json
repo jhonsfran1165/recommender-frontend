@@ -1,0 +1,9 @@
+{
+  "reporter": "junit",
+  "reporterEnabled": "spec, mocha-junit-reporter",
+  "reporterOptions": {
+    "mochaFile": "cypress/results/results-[hash].xml"
+  },
+  "integrationFolder": "cypress/e2e",
+  "chromeWebSecurity": false
+}
