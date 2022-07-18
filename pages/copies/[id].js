@@ -26,7 +26,7 @@ const Copy = (props) => {
           <Flex p={10}>
             <Hit hit={data} w="100%" disableAction={true} />
           </Flex>
-          <Flex gap={4} w="100%" wrap="wrap" pl={2}>
+          <Flex id={"recommendations"} gap={4} w="100%" wrap="wrap" pl={2}>
             {dataRules?.map((rule) => {
               const {
                 antecedent_support,

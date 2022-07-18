@@ -97,7 +97,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 const KMeans = () => {
   const router = useRouter();
-  const [loading, data, error] = useKmeans();
+  const [loading, data, error] = useKmeans({ prog: 3743, jor: "DIU", sede: 0 });
 
   if (loading) {
     return <Loader />;
@@ -113,6 +113,7 @@ const KMeans = () => {
         bottom: 40,
         left: 40,
       }}
+      id={"clusters"}
     >
       <CartesianGrid />
       <XAxis

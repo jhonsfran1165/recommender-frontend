@@ -3,6 +3,9 @@ export const form = () => cy.get("form");
 export const searchField = () => cy.get('[id="search"]');
 export const navLogout = () => cy.get("[id=logout]");
 export const searchBox = () => cy.get('[id="searchResults"]');
+export const recommendationsBox = () => cy.get('[id="recommendations"]');
+export const kmeansBox = () => cy.get('[id="kmeans"]');
+export const kmeansGraphBox = () => cy.get(".recharts-legend-wrapper");
 
 // Error login Selectors
 export const errorMsgEmail = () =>

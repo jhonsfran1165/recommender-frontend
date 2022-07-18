@@ -16,6 +16,7 @@ export default function SearchEngine() {
       <Flex w="100%" pl={10} as="main">
         <Link href={`/kmeans`}>
           <Button
+            id={"kmeans"}
             colorScheme={"red"}
             bg={"red.400"}
             rounded={"full"}

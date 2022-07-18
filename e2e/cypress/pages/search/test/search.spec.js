@@ -1,8 +1,9 @@
 import { validUser } from "../../login/mocks/loginData";
 import { login, logout } from "../../login/modules/login";
-import { validSearch } from "../mocks/searchData";
+import { invalidSearch, validSearch } from "../mocks/searchData";
 import { resetForm, search } from "../modules/search";
 import SearchTest from "../scenarios/SearchPage";
+import { clickCopy } from "../triggers/searchTriggers";
 import { visit } from "../view/selectors";
 
 const searchBook = () => {
@@ -13,8 +14,7 @@ const searchBook = () => {
       visit();
     });
 
-    // Test Empty Form Fields
-    it("Search Empty Fields", () => {
+    it("Search book", () => {
       login(validUser.username, validUser.password);
       search(validSearch.copyId);
 
@@ -25,12 +25,27 @@ const searchBook = () => {
       logout();
     });
 
-    // Test login - Invalid Credentials
-    // it("Testing Login - Invalid Email", () => {
-    //   login(invalidUser.username, invalidUser.password);
-    //   LoginPage.validateErrorMsgEmail("Email is invalid");
-    //   resetForm();
-    // });
+    it("Search book - No result", () => {
+      login(validUser.username, validUser.password);
+      search(invalidSearch.copyId);
+
+      SearchPage.validateNoResultBook();
+
+      resetForm();
+      logout();
+    });
+
+    it("Search book recommendation", () => {
+      login(validUser.username, validUser.password);
+      search(validSearch.copyId);
+
+      SearchPage.validActiveSearchBox();
+      SearchPage.validateNameBook(validSearch.name);
+      clickCopy(validSearch.name);
+      SearchPage.validateRecommendations();
+
+      logout();
+    });
   });
 };
 

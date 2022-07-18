@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { appInfo } from "../config/appInfo";
 
-const useKmeans = () => {
-  const url = `${appInfo.apiDomain}${appInfo.apiVersionPath}rules/kmeans`;
+const useKmeans = ({ prog, jor, sede }) => {
+  const url = `${appInfo.apiDomain}${appInfo.apiVersionPath}rules/kmeans?prog=${prog}&jor=${jor}&sede=${sede}`;
   const [kmeans, setKmeans] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
