@@ -1,11 +1,10 @@
-import { nameField, passwordField, closeMsg } from "../view/selectors";
 import {
-  submitForm,
-  clearUsername,
   clearPassword,
-  onNavbar,
+  clearUsername,
   outHome,
+  submitForm,
 } from "../triggers/loginTriggers";
+import { nameField, passwordField } from "../view/selectors";
 
 // Login
 export const login = (username, password) => {
@@ -22,7 +21,6 @@ export const login = (username, password) => {
 
 // Logout
 export const logout = () => {
-  onNavbar();
   outHome();
 };
 
@@ -30,9 +28,4 @@ export const logout = () => {
 export const resetForm = () => {
   clearUsername();
   clearPassword();
-};
-
-// close login error message
-export const closeError = () => {
-  closeMsg().click();
 };

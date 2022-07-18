@@ -1,6 +1,6 @@
 const validUser = {
-  username: "whaleandjaguar",
-  password: "cienciayvision",
+  username: "jhonsfran@gmail.com",
+  password: "jhoan123",
 };
 
 const invalidUser = {

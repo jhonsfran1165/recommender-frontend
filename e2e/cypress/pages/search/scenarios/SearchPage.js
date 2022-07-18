@@ -1,14 +1,18 @@
 import {
-  btnIniciarSesion,
   errorMsgEmail,
   errorMsgPassword,
   headMsg,
   homeTitle,
+  searchBox,
 } from "../view/selectors";
 
-class LoginPage {
-  validActiveField = () => {
-    btnIniciarSesion().should("be.visible");
+class SearchPage {
+  validActiveSearchBox = () => {
+    searchBox().should("be.visible");
+  };
+
+  validateNameBook = (name) => {
+    searchBox().contains(name);
   };
 
   checkErrorMsgEmail = () => {
@@ -36,4 +40,4 @@ class LoginPage {
   };
 }
 
-export default LoginPage;
+export default SearchPage;

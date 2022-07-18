@@ -6,6 +6,7 @@ const SearchBox = ({ currentRefinement, refine }) => (
   <form noValidate action="" role="search">
     <Flex gap={4} m={5} w="100%">
       <Input
+        id={"search"}
         placeholder="Busca por una palabra clave o codigo"
         size="md"
         type="search"

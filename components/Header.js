@@ -30,6 +30,7 @@ const Header = (props) => {
         onClick={toggleColorMode}
       ></IconButton>
       <IconButton
+        id="logout"
         ml={4}
         icon={<FaSignOutAlt />}
         color="gray.700"

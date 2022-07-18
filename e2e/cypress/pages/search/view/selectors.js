@@ -1,10 +1,8 @@
-export const visit = () => cy.visit("/auth");
+export const visit = () => cy.visit("/search");
 export const form = () => cy.get("form");
-export const nameField = () => cy.get('[name="email"]');
-export const passwordField = () => cy.get('[name="password"]');
+export const searchField = () => cy.get('[id="search"]');
 export const navLogout = () => cy.get("[id=logout]");
-
-export const btnIniciarSesion = () => cy.contains("button", "SIGN IN");
+export const searchBox = () => cy.get('[id="searchResults"]');
 
 // Error login Selectors
 export const errorMsgEmail = () =>

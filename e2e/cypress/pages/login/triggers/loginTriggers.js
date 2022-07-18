@@ -1,10 +1,4 @@
-import {
-  form,
-  nameField,
-  passwordField,
-  navbar,
-  navLogout,
-} from "../view/selectors";
+import { form, nameField, navLogout, passwordField } from "../view/selectors";
 
 // submit form
 export const submitForm = () => form().submit();
@@ -25,5 +19,4 @@ export const typePassword = (password) => {
 };
 
 // click in nav items list
-export const onNavbar = () => navbar().click();
 export const outHome = () => navLogout().click();
