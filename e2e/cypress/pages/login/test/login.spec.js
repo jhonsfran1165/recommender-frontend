@@ -26,6 +26,15 @@ const loginUser = () => {
       resetForm();
     });
 
+    it("Testing Login - Invalid Password", () => {
+      login(validUser.username, invalidUser.password);
+      LoginPage.validateErrorMsgGeneral(
+        "Incorrect email and password combination"
+      );
+      cy.screenshot();
+      resetForm();
+    });
+
     // Test login - Without Password
     it("Testing Login - Without Password", () => {
       login(invalidUser.username, null);

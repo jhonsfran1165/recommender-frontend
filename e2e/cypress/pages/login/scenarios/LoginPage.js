@@ -1,6 +1,7 @@
 import {
   btnIniciarSesion,
   errorMsgEmail,
+  errorMsgGeneral,
   errorMsgPassword,
   headMsg,
   homeTitle,
@@ -13,6 +14,10 @@ class LoginPage {
 
   checkErrorMsgEmail = () => {
     errorMsgEmail().should("be.visible");
+  };
+
+  validateErrorMsgGeneral = () => {
+    errorMsgGeneral().should("be.visible");
   };
 
   checkErrorMsgPassword = () => {

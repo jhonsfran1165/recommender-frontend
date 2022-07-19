@@ -10,6 +10,9 @@ export const btnIniciarSesion = () => cy.contains("button", "SIGN IN");
 export const errorMsgEmail = () =>
   cy.get('[data-supertokens="inputWrapper inputError"]');
 
+export const errorMsgGeneral = () =>
+  cy.get('[data-supertokens="generalError"]');
+
 export const errorMsgPassword = () =>
   cy.get('[data-supertokens="inputErrorMessage"]');
 
