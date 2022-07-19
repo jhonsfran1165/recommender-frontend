@@ -5,7 +5,7 @@ import { clickKmeans } from "../triggers/searchTriggers";
 import { visit } from "../view/selectors";
 
 const kmeansSearch = () => {
-  describe("Search Books", () => {
+  describe("Kmeans Clusters", () => {
     const SearchPage = new SearchTest();
 
     beforeEach(() => {
@@ -15,9 +15,14 @@ const kmeansSearch = () => {
     it("Search kmeans", () => {
       login(validUser.username, validUser.password);
       clickKmeans();
+
+      // kmeans can take longer than this
+      cy.wait(20000);
+
       SearchPage.validKmeansGraph("Cluster 0");
       SearchPage.validKmeansGraph("Cluster 1");
       SearchPage.validKmeansGraph("Cluster 2");
+      cy.screenshot();
       logout();
     });
   });

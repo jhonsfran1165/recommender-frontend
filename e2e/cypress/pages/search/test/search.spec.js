@@ -20,6 +20,7 @@ const searchBook = () => {
 
       SearchPage.validActiveSearchBox();
       SearchPage.validateNameBook(validSearch.name);
+      cy.screenshot();
 
       resetForm();
       logout();
@@ -30,6 +31,7 @@ const searchBook = () => {
       search(invalidSearch.copyId);
 
       SearchPage.validateNoResultBook();
+      cy.screenshot();
 
       resetForm();
       logout();
@@ -43,6 +45,7 @@ const searchBook = () => {
       SearchPage.validateNameBook(validSearch.name);
       clickCopy(validSearch.name);
       SearchPage.validateRecommendations();
+      cy.screenshot();
 
       logout();
     });

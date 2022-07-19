@@ -1,8 +1,11 @@
 {
-  "reporter": "junit",
-  "reporterEnabled": "spec, mocha-junit-reporter",
+  "reporter": "cypress-mochawesome-reporter",
   "reporterOptions": {
-    "mochaFile": "cypress/results/results-[hash].xml"
+    "reportDir": "cypress/reports/mochawesome-report",
+    "charts": true,
+    "reportPageTitle": "Recommender Test Suite",
+    "embeddedScreenshots": true,
+    "inlineAssets": true
   },
   "integrationFolder": "cypress/e2e",
   "chromeWebSecurity": false

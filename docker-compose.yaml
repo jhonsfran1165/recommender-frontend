@@ -5,7 +5,8 @@ services:
     image: cypress/included:7.5.0
     container_name: recommender-cypress
     # comment this line to execute test in a headless way
-    entrypoint: cypress open --project /app
+    # entrypoint: cypress open --project /app
+    entrypoint: bash -c "npm install cypress-mochawesome-reporter && cypress run --project /app --config-file cypress.json"
     working_dir: /app
     network_mode: "host"
     env_file:

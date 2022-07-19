@@ -15,12 +15,14 @@ const loginUser = () => {
     it("Testing Empty Login Fields", () => {
       resetForm();
       LoginPage.validActiveField();
+      cy.screenshot();
     });
 
     // Test login - Invalid Credentials
     it("Testing Login - Invalid Email", () => {
       login(invalidUser.username, invalidUser.password);
       LoginPage.validateErrorMsgEmail("Email is invalid");
+      cy.screenshot();
       resetForm();
     });
 
@@ -28,6 +30,7 @@ const loginUser = () => {
     it("Testing Login - Without Password", () => {
       login(invalidUser.username, null);
       LoginPage.validateErrorMsgPassword("Field is not optional");
+      cy.screenshot();
       resetForm();
     });
 
@@ -37,6 +40,7 @@ const loginUser = () => {
 
       // validate
       LoginPage.InHomeExpect();
+      cy.screenshot();
 
       logout();
 
