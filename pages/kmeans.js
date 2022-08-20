@@ -1,7 +1,8 @@
 import { Box, Container, Stack, Text } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import Select from "react-select";
 import {
   CartesianGrid,
   Legend,
@@ -14,6 +15,7 @@ import {
 } from "recharts";
 import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import { Hero, Loader } from "../components";
+import { ALL_PROGRAMS } from "../constants";
 import useKmeans from "../hooks/useKmeans";
 
 const EmailPasswordAuthNoSSR = dynamic(
@@ -95,9 +97,11 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-const KMeans = () => {
+const KMeans = ({ dataProg }) => {
   const router = useRouter();
-  const [loading, data, error] = useKmeans({ prog: 3743, jor: "DIU", sede: 0 });
+
+  const [prog, sede, jor] = dataProg?.value?.split("*") || [, ,]; // default program
+  const [loading, data, error] = useKmeans({ prog, jor, sede: parseInt(sede) });
 
   if (loading) {
     return <Loader />;
@@ -165,6 +169,8 @@ const KMeans = () => {
 };
 
 export default function KMeansPage() {
+  const [prog, setProg] = useState({});
+
   return (
     <EmailPasswordAuthNoSSR>
       {" "}
@@ -172,13 +178,20 @@ export default function KMeansPage() {
         <Stack as={Box}>
           <Hero />
           <Text color={"gray.500"}>
-            *** Esta gráfica representa los títulos más demandados para tu
-            programa académico ten en cuenta que la cantidad de días es una
-            sumatoria total de los días en que cada copia del título has sido
+            *** Esta gráfica representa los títulos más para cada cluster en tu
+            programa académico, ten en cuenta que la cantidad de días es una
+            sumatoria total de los días en que cada copia del título ha sido
             prestada. ***
           </Text>
 
-          <KMeans />
+          <Select
+            options={ALL_PROGRAMS}
+            onChange={(value) => {
+              setProg(value);
+            }}
+          />
+
+          <KMeans dataProg={prog} />
         </Stack>
       </Container>
     </EmailPasswordAuthNoSSR>
